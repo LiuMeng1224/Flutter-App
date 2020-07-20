@@ -1,3 +1,5 @@
+import 'package:ECEIBS/router/application.dart';
+import 'package:ECEIBS/router/routers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -69,9 +71,9 @@ class _GuidePageState extends State<GuidePage>{
   //跳转到下一个页面
   _nextPage(){
     if(_isLogin){
-      Navigator.popAndPushNamed(context, "MainPageRoute");
+      Application.router.navigateTo(context, Routers.home,clearStack: true);
     }else{
-      Navigator.popAndPushNamed(context, "LoginPageRoute");
+      Application.router.navigateTo(context, Routers.login,clearStack: true);
     }
   }
 

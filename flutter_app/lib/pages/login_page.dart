@@ -1,4 +1,6 @@
 import 'package:ECEIBS/pages/main_page.dart';
+import 'package:ECEIBS/router/application.dart';
+import 'package:ECEIBS/router/routers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -296,8 +298,7 @@ class _LoginPage extends State<LoginPage> {
                         _preference.then((preference) => {
                           preference.setString("token", "123456")
                         });
-                        Navigator.pushAndRemoveUntil(context, new MaterialPageRoute(builder: (context) => MainPage()), (_)=>false);
-//                        Navigator.push<Object>(context, MaterialPageRoute(builder: (context) => MainPage()));
+                        Application.router.navigateTo(context, Routers.home,clearStack: true);
                       },
                     ),
                     SizedBox(
