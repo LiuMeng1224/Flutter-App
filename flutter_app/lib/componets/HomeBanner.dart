@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
 import 'dart:async';
-
 import 'package:ECEIBS/model/BannerItem.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+
 
 class HomeBanner extends StatefulWidget{
   @override

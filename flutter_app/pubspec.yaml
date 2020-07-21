@@ -31,6 +31,7 @@ dependencies:
   shared_preferences: ^0.5.7+3
   video_player: ^0.10.11+2
   fluro: ^1.6.3
+  flutter_screenutil: ^2.3.0
 
 dev_dependencies:
   flutter_test:
@@ -77,8 +78,10 @@ flutter:
     - assets/images/icon_mine_bg.webp
     - assets/images/icon_default_head.png
     - assets/images/card_mine.webp
+    - assets/images/icon_course_online.webp
     - assets/audio/Butterfly-209.mp4
     - assets/audio/bumble_bee_captions.srt
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

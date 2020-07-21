@@ -159,7 +159,6 @@ class MinPageState extends State<MinePage>{
                     "cs5",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        color: Colors.white,
                         fontSize: 12
                     ),
                   ),

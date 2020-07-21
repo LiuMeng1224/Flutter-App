@@ -1,8 +1,9 @@
-import 'package:ECEIBS/router/routers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ECEIBS/router/application.dart';
+import 'package:ECEIBS/router/routers.dart';
+import 'package:flutter_screenutil/screenutil.dart';
 //启动页
 class WelcomePage extends StatefulWidget{
   @override
@@ -120,6 +121,7 @@ class _WelcomePageState extends State<WelcomePage>{
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context,width: 750,height: 1334);
     return Align(child: Image.asset("assets/images/splash_img.webp",fit: BoxFit.cover,),);
   }
 

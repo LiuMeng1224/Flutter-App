@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ECEIBS/pages/welcome_page.dart';
 import 'package:ECEIBS/router/routers.dart';
+import 'package:flutter_screenutil/screenutil.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,9 +18,8 @@ class MyApp extends StatelessWidget {
     final Router router = Router();
     Routers.configureRouters(router);
     Application.router = router;
-
     SystemChrome.setEnabledSystemUIOverlays([]);
-
+    
     //flutter可以隐藏状态栏或使得状态栏透明，同时也支持底部按钮栏的隐藏
 //    SystemChrome.setEnabledSystemUIOverlays([]);//隐藏状态栏，底部按钮栏
 //    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);//隐藏状态栏，保留底部按钮栏

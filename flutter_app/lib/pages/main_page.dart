@@ -4,6 +4,7 @@ import 'package:ECEIBS/pages/VideoTest.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 //主页面
 class MainPage extends StatefulWidget {
@@ -39,7 +40,7 @@ class _MainPageState extends State<MainPage> {
   _renderAppBar(BuildContext context, Widget widget) {
     if (_currentIndex == 0) {
       return AppBar(
-        backgroundColor: Color(0xffF6F6F6),
+        backgroundColor: Colors.white,
         automaticallyImplyLeading: false,//通过设置属性去掉返回按钮 automaticallyImplyLeading: false
         title: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -50,12 +51,12 @@ class _MainPageState extends State<MainPage> {
                 padding: EdgeInsets.only(left: 10, right: 10),
                 alignment: Alignment.centerLeft,
                 decoration: BoxDecoration(
-                  color: Color(0xffffffff),
+                  color: Color(0xffF6F6F6),
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                 ),
                 child: GestureDetector(
                   child: Text(
-                    "搜索课程/培训疾患/学习资源",
+                    "搜索课程/培训计划/学习资源",
                     style: TextStyle(
                       color: Color(0xff999999),
                       fontSize: 10,
@@ -72,8 +73,8 @@ class _MainPageState extends State<MainPage> {
                 },
                 child: Image.asset(
                   "assets/images/message_new.webp",
-                  width: 20,
-                  height: 20,
+                  width: ScreenUtil().setWidth(45),
+                  height: ScreenUtil().setWidth(45),
                 ),
               ),
             ),
@@ -94,6 +95,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _renderAppBar(context, widget),
+      backgroundColor: Colors.white,
       body: IndexedStack(
         index: _currentIndex,
         children: _widgetList,

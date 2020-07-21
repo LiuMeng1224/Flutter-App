@@ -36,7 +36,6 @@ class HomeSpecialColumnState extends State<HomeSpecialColumn>{
   Widget _getHeader(){
     return Container(
       alignment: Alignment.center,
-      color: Colors.white,
       height: 40,
       child: Text(
         "-专栏测试-",
@@ -52,7 +51,6 @@ class HomeSpecialColumnState extends State<HomeSpecialColumn>{
   //底部布局
   Widget _getFooter(){
     return Container(
-      color: Colors.white,
       width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.all(10),
       child: Text(
@@ -81,7 +79,6 @@ class HomeSpecialColumnState extends State<HomeSpecialColumn>{
           ),
           Container(
             height: 200,
-            color: Colors.white,
             padding: EdgeInsets.only(left: 15,right: 15,top:10),
             child: Column(
               children: [

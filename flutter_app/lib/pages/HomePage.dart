@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:ECEIBS/componets/HomeBanner.dart';
 import 'package:ECEIBS/componets/HomePlan.dart';
 import 'package:ECEIBS/componets/HomeSpecialColumn.dart';
 import 'package:ECEIBS/componets/NavigatorModule.dart';
-import 'package:flutter/material.dart';
 
 //首页
 class HomePage extends StatefulWidget{
@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget{
 }
 
 class HomePageState extends State<HomePage>{
-  List<String> _moduleList = ["banner","navigator","plan","video","project"];
+  List<String> _moduleList = ["banner","navigator","elective plan","compulsory plan","video","project"];
   ScrollController _controller = ScrollController();
   bool _isLoading = false; // 是否正在请求数据中
   bool _hasMore = true; // 是否还有更多数据可加载
@@ -61,6 +61,7 @@ class HomePageState extends State<HomePage>{
 
   @override
   Widget build(BuildContext context) {
+
     return Stack(
       children: [
         RefreshIndicator(
@@ -74,13 +75,15 @@ class HomePageState extends State<HomePage>{
                 case "navigator": //导航
                   return NavigatorModule();
                   break;
-                case "plan": //计划
-                  return HomePlan();
+                case "elective plan": //选修计划
+                  return HomePlan(1);
+                  break;
+                case "compulsory plan": //必修计划
+                  return HomePlan(2);
                   break;
                 case "project": //项目
                   return Container(
-                    color: Colors.yellow,
-                    height: 300,
+                    height: 0,
                   );
                   break;
                 case "video":
