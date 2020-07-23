@@ -63,7 +63,7 @@ class NavigatorModuleState extends State<NavigatorModule>{
           children: [
             Image.asset(
               item.img,
-              width: ScreenUtil().setWidth(80),
+              width: ScreenUtil().setWidth(72),
             ),
             SizedBox(
               height: ScreenUtil().setWidth(3),
@@ -73,7 +73,7 @@ class NavigatorModuleState extends State<NavigatorModule>{
               textAlign: TextAlign.center,
               maxLines: 1,
               style: TextStyle(
-                color: Color(0xff252631),
+                color: Color(0xff222222),
                 fontSize: 12,
               ),
             )
@@ -87,7 +87,9 @@ class NavigatorModuleState extends State<NavigatorModule>{
   Widget build(BuildContext context) {
     return Container(
       height: ScreenUtil().setHeight(160)*lines,
+      margin: EdgeInsets.only(top: 10),
       child: GridView.count(
+        physics: NeverScrollableScrollPhysics(),
           crossAxisCount: 5,
           children: _buildItems(),
       ),

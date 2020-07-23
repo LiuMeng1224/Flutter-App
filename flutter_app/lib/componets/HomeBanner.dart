@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-import 'package:ECEIBS/model/BannerItem.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:ECEIBS/model/BannerItem.dart';
+import 'package:flutter_screenutil/screenutil.dart';
+import 'dart:async';
 
 
 class HomeBanner extends StatefulWidget{
@@ -17,7 +18,6 @@ class HomeBannerState extends State<HomeBanner>{
   int _virtualIndex = 0;
   Timer _timer; //定时器
   List<BannerItem> _bannerList = [];
-
 
   @override
   void initState() {
@@ -121,7 +121,7 @@ class HomeBannerState extends State<HomeBanner>{
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 180,
+      height: ScreenUtil().setHeight(320),
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [

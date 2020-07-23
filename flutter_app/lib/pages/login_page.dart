@@ -86,7 +86,7 @@ class _LoginPage extends State<LoginPage> {
                             maxLines: 1,
                             textAlignVertical: TextAlignVertical.center,
                             controller: _domainController,
-                            style: TextStyle(color: Color(0xff252631), fontSize: 12),
+                            style: TextStyle(color: Color(0xff222222), fontSize: 12),
                             onChanged: (text){
                               setState(() {
                                 isHideDomain = text.isEmpty;
@@ -160,7 +160,7 @@ class _LoginPage extends State<LoginPage> {
                             textAlignVertical: TextAlignVertical.center,
                             controller: _usernameController,
                             style:
-                            TextStyle(color: Color(0xff252631), fontSize: 12),
+                            TextStyle(color: Color(0xff222222), fontSize: 12),
                             onChanged: (text){
                               setState(() {
                                 isHideUsername = text.isEmpty;
@@ -226,7 +226,7 @@ class _LoginPage extends State<LoginPage> {
                             textAlignVertical: TextAlignVertical.center,
                             controller: _passwordController,
                             style:
-                            TextStyle(color: Color(0xff252631), fontSize: 12),
+                            TextStyle(color: Color(0xff222222), fontSize: 12),
                             obscureText: true,
                             onChanged: (text){
                               setState(() {
@@ -313,7 +313,7 @@ class _LoginPage extends State<LoginPage> {
                               "注册体验",
                               textAlign: TextAlign.start,
                               style: TextStyle(
-                                color: Color(0xff252631),
+                                color: Color(0xff222222),
                                 fontSize: 12,
                                 decoration: TextDecoration.underline,
                               ),

@@ -1,6 +1,8 @@
 import 'package:ECEIBS/pages/HomePage.dart';
 import 'package:ECEIBS/pages/MinePage.dart';
 import 'package:ECEIBS/pages/VideoTest.dart';
+import 'package:ECEIBS/pages/learning_camp.dart';
+import 'package:ECEIBS/pages/stuty_acitivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,6 +20,8 @@ class _MainPageState extends State<MainPage> {
   List<Widget> _widgetList = [];
   List _tabData = [
     {"text": "首页", "icon": Icon(Icons.home)},
+    {"text": "学习营", "icon": Icon(Icons.school)},
+    {"text": "动态", "icon": Icon(Icons.camera)},
     {"text": "我的", "icon": Icon(Icons.perm_identity)}
   ];
   int _currentIndex = 0;
@@ -27,7 +31,11 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
-    _widgetList..add(HomePage())..add(MinePage());
+    _widgetList
+      ..add(HomePage())
+      ..add(LearningCampPage())
+      ..add(StudyActivity())
+      ..add(MinePage());
     _tabData.forEach((element) {
       _itemList.add(BottomNavigationBarItem(
         icon: element["icon"],
