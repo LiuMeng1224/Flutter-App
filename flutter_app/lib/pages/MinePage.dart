@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:ECEIBS/model/ModuleItem.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +38,7 @@ class MinPageState extends State<MinePage>{
     }else{
       _lines = result.toInt();
     }
+    print("_lines=======$_lines");
     setState(() {
 
     });
@@ -105,27 +108,13 @@ class MinPageState extends State<MinePage>{
 
   Widget _getMyStudy(){
     return Container(
-      height: ScreenUtil().setHeight(80*_lines+80),
+      height: ScreenUtil().setHeight(200*_lines),
       padding: EdgeInsets.only(top:12,left: 15,right: 15,bottom: 20),
       color: Colors.white,
-      child: Column(
-        children: [
-          SizedBox(
-            height: ScreenUtil().setHeight(80),
-            child: Text(
-              "我的学习",
-              style: TextStyle(
-                color: Color(0xff222222),
-                fontSize: 14,
-              ),
-            ),
-          ),
-          GridView.count(
-              crossAxisCount: 4,
-              physics: NeverScrollableScrollPhysics(),
-              children: _getItems(),
-          )
-        ],
+      child: GridView.count(
+        crossAxisCount: 4,
+        physics: NeverScrollableScrollPhysics(),
+        children: _getItems(),
       ),
     );
 
@@ -134,7 +123,7 @@ class MinPageState extends State<MinePage>{
   List<Widget> _getItems(){
     List<Widget> items = [];
     dataList.forEach((element) {
-      _getItem(element);
+      items.add(_getItem(element));
     });
     return items;
   }
@@ -145,6 +134,9 @@ class MinPageState extends State<MinePage>{
         Image.asset(item.img,
           width: ScreenUtil().setWidth(40),
           fit: BoxFit.fitWidth,
+        ),
+        SizedBox(
+          height: 5,
         ),
         Text(
           item.name,
@@ -164,6 +156,20 @@ class MinPageState extends State<MinePage>{
         _getUserInfo(),
         SizedBox(
           height: 10,
+        ),
+        Container(
+          padding: EdgeInsets.only(left: 15),
+          height: ScreenUtil().setHeight(80),
+          alignment: Alignment.centerLeft,
+          color: Colors.white,
+          child: Text(
+            "我的学习",
+            style: TextStyle(
+              fontSize: 14,
+              color: Color(0xff222222),
+              fontWeight: FontWeight.w600
+            ),
+          ),
         ),
         _getMyStudy(),
       ],
