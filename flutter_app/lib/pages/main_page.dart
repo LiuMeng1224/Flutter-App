@@ -103,7 +103,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _renderAppBar(context, widget),
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xfff7f7f7),
       body: IndexedStack(
         index: _currentIndex,
         children: _widgetList,

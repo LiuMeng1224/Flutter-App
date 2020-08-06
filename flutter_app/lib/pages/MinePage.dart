@@ -1,5 +1,8 @@
+import 'package:ECEIBS/model/ModuleItem.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MinePage extends StatefulWidget{
   @override
@@ -11,172 +14,158 @@ class MinePage extends StatefulWidget{
 
 class MinPageState extends State<MinePage>{
 
-  List<String> mineList = ["assets/images/card_mine.webp","assets/images/card_mine.webp","assets/images/card_mine.webp","assets/images/card_mine.webp","assets/images/card_mine.webp"];
+  List<ModuleItem> dataList = [];
+  int _lines = 0;
 
   @override
   void initState() {
     super.initState();
+    _getData();
   }
 
-  List<Widget> _getViewList(){
-    List<Widget> widgetList = [];
-    mineList.forEach((element) {
-      widgetList.add(InkWell(
-        onTap: (){
-          print("点击了$element");
-        },
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image.asset(
-              element,
-              width: 30,
-              height: 30,
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Text(
-              "学习轨迹",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Color(0xff7f8485),
-                fontSize: 12,
-              ),
-            ),
-          ],
-        ),
-      ));
+  _getData() async{
+    dataList.add(ModuleItem("离线下载","","","","assets/images/icon_mine_download.png"));
+    dataList.add(ModuleItem("收藏","","","","assets/images/icon_mine_collect.png"));
+    dataList.add(ModuleItem("学习轨迹","","","","assets/images/icon_mine_learn_history.png"));
+    dataList.add(ModuleItem("我的笔记","","","","assets/images/icon_mine_note.png"));
+    dataList.add(ModuleItem("我的提问","","","","assets/images/icon_mine_my_questions.png"));
+    dataList.add(ModuleItem("打卡","","","","assets/images/icon_mine_docard.png"));
+    double result = dataList.length/4.0;
+    if(dataList.length%4 > 0){
+      _lines = result.toInt() +1;
+    }else{
+      _lines = result.toInt();
+    }
+    setState(() {
+
     });
-    return widgetList;
   }
 
-  Widget _getTotalDataView(){
-
-    return Positioned(
-      top: 200,
-      left: 80,
-      child: Container(
-        width: MediaQuery.of(context).size.width-160,
-        height: 40,
-        decoration: BoxDecoration(
-          color: Color(0xffD5E7F8),
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: Color(0xff005587),
-            width: 1
-          )
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              "学分：",
-              style: TextStyle(
-                color: Color(0xff7F8485),
-                fontSize: 11
-              ),
+  //用户信息布局
+  Widget _getUserInfo(){
+    return Container(
+      color: Colors.white,
+      child: Column(
+        children: [
+          SizedBox(
+            height: ScreenUtil().setHeight(40),
+          ),
+          Container(
+            padding: EdgeInsets.all(10),
+            alignment: Alignment.centerRight,
+            child: Image.asset("assets/images/icon_setting.png",
+              width: ScreenUtil().setWidth(40),
+              height: ScreenUtil().setWidth(40),
             ),
-            Text(
-              "1111",
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: Color(0xff005587),
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(
-              width: 15,
-            ),
-            SizedBox(
-              width: 1,
-              height: 26,
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  color: Color(0xffdddddd)
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 15,right: 15,bottom: 10),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset(
+                  "assets/images/icon_mine_header.png",
+                  width: ScreenUtil().setWidth(130),
+                  height: ScreenUtil().setWidth(130),
                 ),
-              ),
+                SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Frances Fox",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: Color(0xff2A2B2B),
+                          fontSize: 17,
+                        ),
+                      ),
+                      Text("最近登录：2020.04.23",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: Color(0xff777777),
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            SizedBox(
-              width: 15,
-            ),
-            Text(
-              "积分：",
-              style: TextStyle(
-                  color: Color(0xff7F8485),
-                  fontSize: 11
-              ),
-            ),
-            Text(
-              "222",
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                  color: Color(0xff005587),
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
+    );
+
+  }
+
+  Widget _getMyStudy(){
+    return Container(
+      height: ScreenUtil().setHeight(80*_lines+80),
+      padding: EdgeInsets.only(top:12,left: 15,right: 15,bottom: 20),
+      color: Colors.white,
+      child: Column(
+        children: [
+          SizedBox(
+            height: ScreenUtil().setHeight(80),
+            child: Text(
+              "我的学习",
+              style: TextStyle(
+                color: Color(0xff222222),
+                fontSize: 14,
+              ),
+            ),
+          ),
+          GridView.count(
+              crossAxisCount: 4,
+              physics: NeverScrollableScrollPhysics(),
+              children: _getItems(),
+          )
+        ],
+      ),
+    );
+
+  }
+
+  List<Widget> _getItems(){
+    List<Widget> items = [];
+    dataList.forEach((element) {
+      _getItem(element);
+    });
+    return items;
+  }
+
+  Widget _getItem(ModuleItem item){
+    return Column(
+      children: [
+        Image.asset(item.img,
+          width: ScreenUtil().setWidth(40),
+          fit: BoxFit.fitWidth,
+        ),
+        Text(
+          item.name,
+          style: TextStyle(
+            fontSize: 12,
+            color: Color(0xff2A2B2B)
+          ),
+        )
+      ],
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return new Stack(
+    return Column(
       children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              height: 220,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/icon_mine_bg.webp"),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              alignment: Alignment.center,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    "assets/images/icon_default_head.png",
-                    width: 50,
-                    height: 50,
-                  ),
-                  SizedBox(
-                    height: 3,
-                  ),
-                  Text(
-                    "cs5",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 12
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              height: 320,
-              child: GridView.count(
-                padding: EdgeInsets.only(left: 15,right: 15,top:30,),
-                crossAxisCount: 4,
-                children: _getViewList(),
-              ),
-            ),
-
-          ],
+        _getUserInfo(),
+        SizedBox(
+          height: 10,
         ),
-        _getTotalDataView(),
+        _getMyStudy(),
       ],
     );
   }

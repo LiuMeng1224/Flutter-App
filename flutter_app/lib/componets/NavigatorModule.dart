@@ -88,6 +88,7 @@ class NavigatorModuleState extends State<NavigatorModule>{
     return Container(
       height: ScreenUtil().setHeight(160)*lines,
       margin: EdgeInsets.only(top: 10),
+      color: Colors.white,
       child: GridView.count(
         physics: NeverScrollableScrollPhysics(),
           crossAxisCount: 5,

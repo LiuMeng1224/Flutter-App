@@ -80,6 +80,18 @@ flutter:
     - assets/images/icon_default_head.png
     - assets/images/card_mine.webp
     - assets/images/icon_course_online.webp
+    - assets/images/icon_mine_header.png
+    - assets/images/icon_setting.png
+    - assets/images/icon_mine_learn_data.png
+    - assets/images/icon_mine_note.png
+    - assets/images/icon_mine_learn_history.png
+    - assets/images/icon_mine_my_questions.png
+    - assets/images/icon_mine_ranking.png
+    - assets/images/icon_mine_collect.png
+    - assets/images/icon_mine_download.png
+    - assets/images/icon_mine_integral.png
+    - assets/images/icon_mine_certificate.png
+    - assets/images/icon_mine_docard.png
     - assets/audio/Butterfly-209.mp4
     - assets/audio/bumble_bee_captions.srt
 

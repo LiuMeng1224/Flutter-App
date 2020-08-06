@@ -243,7 +243,9 @@ class HomePlanState extends State<HomePlan>{
 
   @override
   Widget build(BuildContext context) {
-    return IntrinsicHeight(
+    return Container(
+      color: Colors.white,
+      margin: EdgeInsets.only(top: 10),
       child: Column(
         children: _getPlanList(),
       ),
