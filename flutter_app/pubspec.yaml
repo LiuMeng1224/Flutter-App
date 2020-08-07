@@ -33,6 +33,8 @@ dependencies:
   fluro: ^1.6.3
   flutter_screenutil: ^2.3.0
   flutter_easyrefresh: ^2.1.1
+  provider: ^4.3.1
+  flutter_swiper: ^1.1.6
 
 dev_dependencies:
   flutter_test:
@@ -92,6 +94,8 @@ flutter:
     - assets/images/icon_mine_integral.png
     - assets/images/icon_mine_certificate.png
     - assets/images/icon_mine_docard.png
+    - assets/images/home/icon_home_message.png
+    - assets/images/home/icon_home_search.png
     - assets/audio/Butterfly-209.mp4
     - assets/audio/bumble_bee_captions.srt
 

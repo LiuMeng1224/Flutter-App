@@ -1,13 +1,19 @@
+import 'package:ECEIBS/provider/message_counter.dart';
 import 'package:ECEIBS/router/application.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ECEIBS/pages/welcome_page.dart';
 import 'package:ECEIBS/router/routers.dart';
-import 'package:flutter_screenutil/screenutil.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_)=>MessageCounter(),),
+    ],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {

@@ -1,12 +1,11 @@
-import 'package:ECEIBS/pages/HomePage.dart';
-import 'package:ECEIBS/pages/MinePage.dart';
-import 'package:ECEIBS/pages/VideoTest.dart';
-import 'package:ECEIBS/pages/learning_camp.dart';
-import 'package:ECEIBS/pages/stuty_acitivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ECEIBS/pages/HomePage.dart';
+import 'package:ECEIBS/pages/MinePage.dart';
+import 'package:ECEIBS/pages/learning_camp.dart';
+import 'package:ECEIBS/pages/stuty_acitivity.dart';
+import 'package:ECEIBS/componets/home/home_search.dart';
 
 //主页面
 class MainPage extends StatefulWidget {
@@ -45,49 +44,12 @@ class _MainPageState extends State<MainPage> {
   }
 
   //渲染AppBar
-  _renderAppBar(BuildContext context, Widget widget) {
+  _renderAppBar() {
     if (_currentIndex == 0) {
       return AppBar(
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,//通过设置属性去掉返回按钮 automaticallyImplyLeading: false
-        title: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Container(
-                height: 30,
-                padding: EdgeInsets.only(left: 10, right: 10),
-                alignment: Alignment.centerLeft,
-                decoration: BoxDecoration(
-                  color: Color(0xffF6F6F6),
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                ),
-                child: GestureDetector(
-                  child: Text(
-                    "搜索课程/培训计划/学习资源",
-                    style: TextStyle(
-                      color: Color(0xff999999),
-                      fontSize: 10,
-                    ),
-                  ),
-                )
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 10),
-              child: GestureDetector(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>VideoTest()));
-                },
-                child: Image.asset(
-                  "assets/images/message_new.webp",
-                  width: ScreenUtil().setWidth(45),
-                  height: ScreenUtil().setWidth(45),
-                ),
-              ),
-            ),
-          ],
-        ),
+        title: HomeSearch(),
       );
     }
   }
@@ -102,7 +64,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _renderAppBar(context, widget),
+      appBar:_renderAppBar(),
       backgroundColor: Color(0xfff7f7f7),
       body: IndexedStack(
         index: _currentIndex,
