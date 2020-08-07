@@ -1,4 +1,5 @@
 import 'package:ECEIBS/componets/home/home_swiper.dart';
+import 'package:ECEIBS/componets/home/image_text_navigator.dart';
 import 'package:ECEIBS/provider/message_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -77,7 +78,7 @@ class HomePageState extends State<HomePage>{
                   return NavigatorModule();
                   break;
                 case "swiper_test": //
-                  return HomeSwiper();
+                  return ImageTextNavigator();
                   break;
                 case "elective plan": //选修计划
                   return HomePlan(1);

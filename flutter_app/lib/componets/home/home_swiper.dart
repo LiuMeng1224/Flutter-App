@@ -61,7 +61,6 @@ class HomeSwiperState extends State<HomeSwiper>{
   }
 
   List<Widget> _getImageItems(bool isHasPadding,double space,double width,double height){
-
     List<Widget> widgetList = [];
     imageList.forEach((element) {
       if(isHasPadding){
