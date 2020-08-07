@@ -4,6 +4,7 @@ import 'package:ECEIBS/provider/message_counter.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 
+//首页顶部搜索框
 class HomeSearch extends StatelessWidget{
 
   @override
@@ -42,7 +43,6 @@ class HomeSearch extends StatelessWidget{
           padding: EdgeInsets.only(left: 10),
           child: GestureDetector(
             onTap: (){
-//                Navigator.push(context, MaterialPageRoute(builder: (context)=>VideoTest()));
             },
             child: Stack(
               children: [

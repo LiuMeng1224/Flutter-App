@@ -121,6 +121,7 @@ class _WelcomePageState extends State<WelcomePage>{
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context,width: 750,height: 1334);
     return Align(child: Image.asset("assets/images/splash_img.webp",fit: BoxFit.cover,),);
   }
 
