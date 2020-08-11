@@ -1,6 +1,8 @@
+import 'package:ECEIBS/http/api.dart';
 import 'package:ECEIBS/pages/main_page.dart';
 import 'package:ECEIBS/router/application.dart';
 import 'package:ECEIBS/router/routers.dart';
+import 'package:ECEIBS/utils/DeviceUtil.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -292,14 +294,7 @@ class _LoginPage extends State<LoginPage> {
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Color(0xffffffff), fontSize: 15),
                       ),
-                      onPressed: () {
-
-                        Future<SharedPreferences> _preference = SharedPreferences.getInstance();
-                        _preference.then((preference) => {
-                          preference.setString("token", "123456")
-                        });
-                        Application.router.navigateTo(context, Routers.home,clearStack: true);
-                      },
+                      onPressed:login,
                     ),
                     SizedBox(
                       height: 5,
@@ -338,5 +333,14 @@ class _LoginPage extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  void login() async{
+    SharedPreferences _preference = await SharedPreferences.getInstance();
+    _preference.setString(API.token, "6ca93166fc1a7e4625a60c4c2255be8b");
+    _preference.setString(API.user_id, "10547");
+    _preference.setString(API.company_id, "145");
+     await DeviceUtil.getCommonPar();
+    Application.router.navigateTo(context, Routers.home,clearStack: true);
   }
 }

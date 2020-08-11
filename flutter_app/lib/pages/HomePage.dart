@@ -1,4 +1,3 @@
-import 'package:ECEIBS/componets/home/home_swiper.dart';
 import 'package:ECEIBS/componets/home/image_text_navigator.dart';
 import 'package:ECEIBS/provider/message_counter.dart';
 import 'package:flutter/material.dart';

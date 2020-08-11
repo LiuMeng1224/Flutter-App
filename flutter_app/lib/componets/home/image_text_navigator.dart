@@ -1,7 +1,11 @@
+import 'dart:convert';
+
+import 'package:ECEIBS/http/api.dart';
+import 'package:ECEIBS/http/request.dart';
+import 'package:ECEIBS/model/module.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ECEIBS/model/ModuleItem.dart';
 
 //图文导航组件
 class ImageTextNavigator extends StatefulWidget{
@@ -17,7 +21,7 @@ class ImageTextNavigatorState extends State<ImageTextNavigator>{
   int lines = 1;//显示行数
   int crossCount = 2; //每行显示的个数
   double itemWidth = 0; //每个item的宽度
-  List<ModuleItem> moduleList = [];
+  List<NavModules> moduleList = [];
 
   @override
   void initState() {
@@ -27,14 +31,12 @@ class ImageTextNavigatorState extends State<ImageTextNavigator>{
   }
 
   _getData() async{
-    moduleList.add(ModuleItem("学习营","Study Camp","studyCamp","学习营","assets/images/navigator_learningcamp.webp"));
-    moduleList.add(ModuleItem("选修库","Optional Course","select","选修库","assets/images/navigator_elective.webp"));
-    moduleList.add(ModuleItem("知识汇","Content Center","knowledge","知识汇","assets/images/navigator_knowledge.webp"));
-    moduleList.add(ModuleItem("作业墙","Assignment","homeworkWall","作业墙","assets/images/navigator_homework.png"));
-    moduleList.add(ModuleItem("直播","Assignment","id","直播","assets/images/navigator_deadline.webp"));
-    moduleList.add(ModuleItem("到期啦","Due to End","toBeEndNotification","到期啦","assets/images/navigator_deadline.webp"));
-    double result = moduleList.length/5.0;
-    lines = moduleList.length%5>0 ? result.toInt() +1:result.toInt();
+
+    var resultString = await postRequest(API.HOME_MODULES,formData: {"test":"123"});
+    var dataMap = json.decode(resultString.toString());
+    moduleList = dataMap['result']['nav_modules'].map<NavModules>((item)=> NavModules.fromJson(item)).toList();
+    double temp = moduleList.length/5.0;
+    lines = moduleList.length%5>0 ? temp.toInt() +1:temp.toInt();
     crossCount = moduleList.length>5 ? 5 : moduleList.length;
     itemWidth = ScreenUtil.screenWidth/crossCount;
 
@@ -52,7 +54,7 @@ class ImageTextNavigatorState extends State<ImageTextNavigator>{
     return items;
   }
 
-  Widget _getNavigatorItem(ModuleItem item){
+  Widget _getNavigatorItem(NavModules item){
 
     return Container(
       width: itemWidth,
@@ -64,7 +66,12 @@ class ImageTextNavigatorState extends State<ImageTextNavigator>{
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            item.img.isEmpty?
             Image.asset(
+              "assets/images/navigator_learningcamp.webp",
+              width: ScreenUtil().setWidth(60),
+            ):
+            Image.network(
               item.img,
               width: ScreenUtil().setWidth(60),
             ),
