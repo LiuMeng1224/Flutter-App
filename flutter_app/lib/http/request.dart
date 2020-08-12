@@ -1,4 +1,5 @@
 import 'package:ECEIBS/http/api.dart';
+import 'package:ECEIBS/utils/DeviceUtil.dart';
 import 'package:dio/dio.dart';
 
 // get请求 url：请求连接 params：请求参数
@@ -14,7 +15,10 @@ Future getRequest(String url,Map<String,dynamic> params) async{
 
 // post请求 url：请求连接 params：请求参数
 Future postRequest(url,{Map<String,String> formData})async{
-  print("postRequest:url-${url+"?"+API.COMMONPARAMS}");
+  if(API.COMMONPARAMS.isEmpty){
+    API.COMMONPARAMS = await DeviceUtil.getCommonPar();
+  }
+  print("postRequest:url--"+url+"?"+API.COMMONPARAMS);
   try{
     Response response;
     Dio dio = new Dio();

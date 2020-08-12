@@ -46,7 +46,7 @@ class HomeSwiperState extends State<HomeSwiper>{
 
   //图片
   Widget _getImages(bool isHasPadding){
-    double space = ScreenUtil().setWidth(30);
+    double space = ScreenUtil().setWidth(44);
     double imgWidth = isHasPadding?(ScreenUtil.screenWidth-space*(imageList.length+1))/imageList.length:ScreenUtil.screenWidth/imageList.length;
     double imgHeight = imgWidth*(328/750);
     double contentHeight = isHasPadding?imgHeight+space*2:imgHeight;

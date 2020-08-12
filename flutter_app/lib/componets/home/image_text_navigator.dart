@@ -69,11 +69,11 @@ class ImageTextNavigatorState extends State<ImageTextNavigator>{
             item.img.isEmpty?
             Image.asset(
               "assets/images/navigator_learningcamp.webp",
-              width: ScreenUtil().setWidth(60),
+              width: ScreenUtil().setWidth(100),
             ):
             Image.network(
               item.img,
-              width: ScreenUtil().setWidth(60),
+              width: ScreenUtil().setWidth(100),
             ),
             SizedBox(
               height: ScreenUtil().setWidth(6),
@@ -97,8 +97,7 @@ class ImageTextNavigatorState extends State<ImageTextNavigator>{
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.centerLeft,
-      height: ScreenUtil().setHeight(100)*lines+ScreenUtil().setHeight(30)*(lines+1),
-      margin: EdgeInsets.only(top: 10),
+      height: ScreenUtil().setHeight(160)*lines+ScreenUtil().setHeight(30)*(lines+1),
       color: Colors.white,
       child: Wrap(
         alignment: WrapAlignment.start,

@@ -121,7 +121,7 @@ class HomeBannerState extends State<HomeBanner>{
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ScreenUtil().setHeight(320),
+      height: ScreenUtil().setHeight(500),
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [

@@ -63,7 +63,7 @@ class NavigatorModuleState extends State<NavigatorModule>{
           children: [
             Image.asset(
               item.img,
-              width: ScreenUtil().setWidth(72),
+              width: ScreenUtil().setWidth(100),
             ),
             SizedBox(
               height: ScreenUtil().setWidth(3),
@@ -86,7 +86,7 @@ class NavigatorModuleState extends State<NavigatorModule>{
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ScreenUtil().setHeight(160)*lines,
+      height: ScreenUtil().setHeight(200)*lines,
       margin: EdgeInsets.only(top: 10),
       color: Colors.white,
       child: GridView.count(

@@ -14,7 +14,7 @@ class HomeSearch extends StatelessWidget{
       children: [
         Expanded(
           child: Container(
-              height: ScreenUtil().setHeight(60),
+              height: ScreenUtil().setHeight(78),
               padding: EdgeInsets.only(left: 10, right: 10),
               alignment: Alignment.centerLeft,
               decoration: BoxDecoration(
@@ -25,7 +25,7 @@ class HomeSearch extends StatelessWidget{
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Image.asset("assets/images/home/icon_home_search.png",width: 12,height: 12,),
+                    Image.asset("assets/images/home/icon_home_search.png",width: ScreenUtil().setWidth(37),height: ScreenUtil().setWidth(37),),
                     SizedBox(width: 5,),
                     Text(
                       "搜索课程/培训计划/学习",
@@ -48,8 +48,8 @@ class HomeSearch extends StatelessWidget{
               children: [
                 Image.asset(
                   "assets/images/home/icon_home_message.png",
-                  width: ScreenUtil().setWidth(40),
-                  height: ScreenUtil().setWidth(40),
+                  width: ScreenUtil().setWidth(57),
+                  height: ScreenUtil().setWidth(57),
                 ),
                 _getUnreadLabel(context),
               ],
@@ -67,8 +67,8 @@ class HomeSearch extends StatelessWidget{
         top:0,
         right: 0,
         child: SizedBox(
-          width: ScreenUtil().setWidth(10),
-          height: ScreenUtil().setWidth(10),
+          width: ScreenUtil().setWidth(20),
+          height: ScreenUtil().setWidth(20),
           child: DecoratedBox(
             decoration: BoxDecoration(
                 color: Color(0xffFF5050),

@@ -336,7 +336,7 @@ class _LoginPage extends State<LoginPage> {
 
   void login() async{
     SharedPreferences _preference = await SharedPreferences.getInstance();
-    _preference.setString(API.token, "6ca93166fc1a7e4625a60c4c2255be8b");
+    _preference.setString(API.token, "778f094cf6e18d631a4e531b5575ed24");
     _preference.setString(API.user_id, "10547");
     _preference.setString(API.company_id, "145");
      await DeviceUtil.getCommonPar();

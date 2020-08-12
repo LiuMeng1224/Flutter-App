@@ -142,8 +142,8 @@ class HomePlanState extends State<HomePlan>{
 
     if(progress==0 || progress == 100){
       return Container(
-        width: ScreenUtil().setWidth(90),
-        height: ScreenUtil().setWidth(90),
+        width: ScreenUtil().setWidth(120),
+        height: ScreenUtil().setWidth(120),
         alignment: Alignment.center,
         decoration: _getDecoration(progress),
         child: Text(
@@ -159,8 +159,8 @@ class HomePlanState extends State<HomePlan>{
         alignment: Alignment.center,
         children: [
           Container(
-            width: ScreenUtil().setWidth(90),
-            height: ScreenUtil().setWidth(90),
+            width: ScreenUtil().setWidth(120),
+            height: ScreenUtil().setWidth(120),
             alignment: Alignment.center,
             decoration: _getDecoration(progress),
             child: Text(
@@ -172,8 +172,8 @@ class HomePlanState extends State<HomePlan>{
             ),
           ),
           SizedBox(
-            width: ScreenUtil().setWidth(90),
-            height: ScreenUtil().setWidth(90),
+            width: ScreenUtil().setWidth(120),
+            height: ScreenUtil().setWidth(120),
             child: CircularProgressIndicator(
               strokeWidth: 2,
               value: progress/100.0,
@@ -189,8 +189,8 @@ class HomePlanState extends State<HomePlan>{
   //获取计划图片
   Widget _getImage(String image){
     return image.isEmpty?Container(
-      width: ScreenUtil().setWidth(280),
-      height: ScreenUtil().setHeight(160),
+      width: ScreenUtil().setWidth(360),
+      height: ScreenUtil().setHeight(220),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
         image: DecorationImage(
@@ -199,8 +199,8 @@ class HomePlanState extends State<HomePlan>{
         )
       ),
     ):Container(
-      width: ScreenUtil().setWidth(280),
-      height: ScreenUtil().setHeight(160),
+      width: ScreenUtil().setWidth(360),
+      height: ScreenUtil().setHeight(220),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           image: DecorationImage(

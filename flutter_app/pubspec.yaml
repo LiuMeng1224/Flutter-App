@@ -100,6 +100,7 @@ flutter:
     - assets/images/icon_mine_docard.png
     - assets/images/home/icon_home_message.png
     - assets/images/home/icon_home_search.png
+    - assets/images/home/icon_collect_plan.png
     - assets/audio/Butterfly-209.mp4
     - assets/audio/bumble_bee_captions.srt
 
