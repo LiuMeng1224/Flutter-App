@@ -32,17 +32,22 @@ class LearnActivityPlanState extends State<LearnActivityPlan>{
 
   //整体卡片
   Widget _getWarpCardView(){
-    return Card(
-      elevation: 4,
-      shadowColor: Color(0xff434343),
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(5))
-      ),
-      child: Container(
-        padding: EdgeInsets.only(left: ScreenUtil().setWidth(29),right: ScreenUtil().setWidth(29),top: ScreenUtil().setWidth(36),bottom: ScreenUtil().setWidth(36)),
-        color: Colors.white,
-        child: _getPlanView(),
-      ),
+    return Column(
+      children: [
+        _listHeader(),
+        Card(
+          elevation: 4,
+          shadowColor: Color(0xff434343),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(5))
+          ),
+          child: Container(
+            padding: EdgeInsets.only(left: ScreenUtil().setWidth(29),right: ScreenUtil().setWidth(29),top: ScreenUtil().setWidth(36),bottom: ScreenUtil().setWidth(36)),
+            color: Colors.white,
+            child: _getPlanView(),
+          ),
+        ),
+      ],
     );
   }
 
@@ -88,11 +93,13 @@ class LearnActivityPlanState extends State<LearnActivityPlan>{
 
   List<Widget> _getPlanList(){
     List<Widget> widgetList = [];
+    widgetList.add(_listHeader());
     widgetList.add(_leftImageLeftTextItem());
     widgetList.add(_leftImageLeftTextItem());
     return widgetList;
   }
 
+  //计划标题
   Widget _listHeader(){
     return Container(
       color: Colors.white,
@@ -100,27 +107,33 @@ class LearnActivityPlanState extends State<LearnActivityPlan>{
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Padding(
-            padding: EdgeInsets.only(left: 15),
+            padding: EdgeInsets.only(left: ScreenUtil().setWidth(44)),
             child: Text(
               "学习计划",
               textAlign: TextAlign.start,
               style: TextStyle(
-                  fontSize: 18,
+                  fontSize: ScreenUtil().setSp(49),
                   color: Color(0xff222222),
-                  fontWeight: FontWeight.w600
+                  fontWeight: FontWeight.w500
               ),
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(right: 15),
+            padding: EdgeInsets.only(right: ScreenUtil().setWidth(44)),
             child: InkWell(
               onTap: (){},
-              child: Text(
-                "查看全部",
-                style: TextStyle(
-                    fontSize: ScreenUtil().setSp(38),
-                    color: Color(0xff999999)
-                ),
+              child: Row(
+                children: [
+                  Text(
+                    "查看全部",
+                    style: TextStyle(
+                        fontSize: ScreenUtil().setSp(38),
+                        color: Color(0xff999999)
+                    ),
+                  ),
+                  SizedBox(width: 2,),
+                  Image.asset("assets/images/home/icon_plan_more.png",width: ScreenUtil().setWidth(20),height: ScreenUtil().setWidth(35),fit: BoxFit.fill,)
+                ],
               ),
             ),
           )
@@ -134,8 +147,11 @@ class LearnActivityPlanState extends State<LearnActivityPlan>{
     return Padding(
       padding: EdgeInsets.only(left: ScreenUtil().setWidth(44),right: ScreenUtil().setWidth(44),top: ScreenUtil().setWidth(36),bottom: ScreenUtil().setWidth(36)),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _getImageView(""),
+          SizedBox(width: ScreenUtil().setWidth(38),),
+          _getTextView(),
         ],
       ),
     );
@@ -145,7 +161,7 @@ class LearnActivityPlanState extends State<LearnActivityPlan>{
   Widget _getImageView(String img){
     return Container(
       width: ScreenUtil().setWidth(346),
-      height: ScreenUtil().setWidth(245),
+      height: ScreenUtil().setHeight(245),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(ScreenUtil().setWidth(8))),
         image: DecorationImage(
@@ -291,10 +307,132 @@ class LearnActivityPlanState extends State<LearnActivityPlan>{
               ),
             ),
           ),
+          Positioned(//计划进度
+            right: ScreenUtil().setWidth(15),
+            bottom: ScreenUtil().setHeight(15),
+            child: Text(
+              "50%",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: ScreenUtil().setSp(29)
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
 
+  //文案view
+  Widget _getTextView(){
+    return Expanded(
+      child: SizedBox(
+        height: ScreenUtil().setHeight(245),
+        child: Stack(
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "设计工作上最重要的是针对人们习以为常，认为理所当然，势力扩大飞机萨拉丁开发手动阀手动阀",
+                  maxLines: 2,
+                  textAlign: TextAlign.start,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      color: Color(0xff222222),
+                      fontSize: ScreenUtil().setSp(47),
+                      fontWeight: FontWeight.w500,
+                  ),
+                ),
+                SizedBox(height: ScreenUtil().setHeight(12),),
+                Text(
+                  "2020.03.22~2020.03.30",
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      color: Color(0xff999999),
+                      fontSize: ScreenUtil().setSp(38)
+                  ),
+                ),
+              ],
+            ),
+            Positioned(
+              left: 0,
+              bottom: 0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Offstage(
+                    offstage: false,
+                    child: SizedBox(
+                      height: ScreenUtil().setWidth(49),
+                      child: DecoratedBox(
+                          decoration: BoxDecoration(
+                              color: Color(0x2000709D),
+                              borderRadius: BorderRadius.all(Radius.circular(ScreenUtil().setWidth(8)))
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 3,right: 3),
+                            child: Text(
+                              "在线",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Color(0xff00709D),
+                                fontSize: ScreenUtil().setSp(32),
+                              ),
+                            ),
+                          )
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: ScreenUtil().setWidth(14),),
+                  Offstage(
+                    offstage: false,
+                    child: SizedBox(
+                      height: ScreenUtil().setWidth(49),
+                      child: DecoratedBox(
+                          decoration: BoxDecoration(
+                              color: Color(0x2000709D),
+                              borderRadius: BorderRadius.all(Radius.circular(ScreenUtil().setWidth(8)))
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 3,right: 3),
+                            child: Text(
+                              "面授",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Color(0xff00709D),
+                                fontSize: ScreenUtil().setSp(32),
+                              ),
+                            ),
+                          )
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: Offstage(
+                offstage: false,
+                child: Text(
+                  "必修",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Color(0xff00709D),
+                    fontSize: ScreenUtil().setSp(38),
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
 
 }
