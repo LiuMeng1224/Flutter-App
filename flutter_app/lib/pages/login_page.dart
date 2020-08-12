@@ -1,5 +1,4 @@
 import 'package:ECEIBS/http/api.dart';
-import 'package:ECEIBS/pages/main_page.dart';
 import 'package:ECEIBS/router/application.dart';
 import 'package:ECEIBS/router/routers.dart';
 import 'package:ECEIBS/utils/DeviceUtil.dart';
