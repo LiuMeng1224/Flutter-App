@@ -12,17 +12,23 @@ class LearnActivityPlan extends StatefulWidget{
 }
 
 class LearnActivityPlanState extends State<LearnActivityPlan>{
-  int styleType = 1; //1、整体卡片 2、
+  int styleType = 3; //1、左图右文or左文右图-整体卡片 2、左图右文or左文右图-无边式 3、左图右文or左文右图-单独卡片
 
   @override
   Widget build(BuildContext context) {
 
     switch(styleType){
       case 0:
-        return _getWarpCardView();
+        return _getNoBorderView();
         break;
       case 1:
+        return _getWarpCardView();
+        break;
+      case 2:
         return _getNoBorderView();
+        break;
+      case 3:
+        return _getItemCardView();
         break;
       default:
         return _getNoBorderView();
@@ -36,15 +42,30 @@ class LearnActivityPlanState extends State<LearnActivityPlan>{
       children: [
         _listHeader(),
         Card(
-          elevation: 4,
+          elevation: ScreenUtil().setWidth(4),
           shadowColor: Color(0xff434343),
+          margin: EdgeInsets.all(ScreenUtil().setWidth(44)),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(5))
           ),
-          child: Container(
-            padding: EdgeInsets.only(left: ScreenUtil().setWidth(29),right: ScreenUtil().setWidth(29),top: ScreenUtil().setWidth(36),bottom: ScreenUtil().setWidth(36)),
-            color: Colors.white,
-            child: _getPlanView(),
+          child: Column(
+            children: _getPlanList(),
+          ),
+        ),
+      ],
+    );
+  }
+
+  //单独卡片式
+  Widget _getItemCardView(){
+    return Column(
+      children: [
+        _listHeader(),
+        Container(
+          color: Colors.white,
+          margin: EdgeInsets.all(ScreenUtil().setWidth(44)),
+          child: Column(
+            children: _getPlanList(),
           ),
         ),
       ],
@@ -84,18 +105,29 @@ class LearnActivityPlanState extends State<LearnActivityPlan>{
     );
   }
 
-  //获取计划整体布局
-  Widget _getPlanView(){
-    return Container(
-      color: Colors.white,
-    );
-  }
-
   List<Widget> _getPlanList(){
     List<Widget> widgetList = [];
-    widgetList.add(_listHeader());
-    widgetList.add(_leftImageLeftTextItem());
-    widgetList.add(_leftImageLeftTextItem());
+    switch(styleType){
+      case 0:
+        widgetList.add(_listHeader());
+        widgetList.add(_leftImageLeftTextItem());
+        widgetList.add(_leftImageLeftTextItem());
+        break;
+      case 1:
+        widgetList.add(_leftImageLeftTextItem());
+        widgetList.add(_leftImageLeftTextItem());
+        break;
+      case 2:
+        widgetList.add(_listHeader());
+        break;
+      case 3:
+        widgetList.add(_getCardItem());
+        widgetList.add(SizedBox(height: ScreenUtil().setHeight(20),));
+        widgetList.add(_getCardItem());
+        break;
+      default:
+        break;
+    }
     return widgetList;
   }
 
@@ -142,10 +174,17 @@ class LearnActivityPlanState extends State<LearnActivityPlan>{
     );
   }
 
+  //卡片item
+  Widget _getCardItem(){
+    return Card(
+      child: _leftTextRightImage(),
+    );
+  }
+
   //左图右文
   Widget _leftImageLeftTextItem(){
     return Padding(
-      padding: EdgeInsets.only(left: ScreenUtil().setWidth(44),right: ScreenUtil().setWidth(44),top: ScreenUtil().setWidth(36),bottom: ScreenUtil().setWidth(36)),
+      padding: _getPadding(),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -155,6 +194,38 @@ class LearnActivityPlanState extends State<LearnActivityPlan>{
         ],
       ),
     );
+  }
+
+  //作文有图布局
+  Widget _leftTextRightImage(){
+    return Padding(
+      padding: _getPadding(),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _getTextView(),
+          SizedBox(width: ScreenUtil().setWidth(38),),
+          _getImageView(""),
+        ],
+      ),
+    );
+  }
+
+  EdgeInsetsGeometry _getPadding(){
+    switch(styleType){
+      case 1:
+        return EdgeInsets.only(left: ScreenUtil().setWidth(29),right: ScreenUtil().setWidth(29),top: ScreenUtil().setWidth(36),bottom: ScreenUtil().setWidth(36));
+        break;
+      case 2:
+        return EdgeInsets.only(left: ScreenUtil().setWidth(44),right: ScreenUtil().setWidth(44),top: ScreenUtil().setWidth(36),bottom: ScreenUtil().setWidth(36));
+        break;
+      case 3:
+        return EdgeInsets.all(ScreenUtil().setWidth(29));
+        break;
+      default:
+        return EdgeInsets.only(left: ScreenUtil().setWidth(44),right: ScreenUtil().setWidth(44),top: ScreenUtil().setWidth(36),bottom: ScreenUtil().setWidth(36));
+        break;
+    }
   }
 
   //图片view
