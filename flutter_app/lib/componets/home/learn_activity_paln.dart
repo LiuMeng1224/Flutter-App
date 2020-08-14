@@ -14,8 +14,13 @@ class LearnActivityPlan extends StatefulWidget{
 class LearnActivityPlanState extends State<LearnActivityPlan>{
   double _itemWidth = 0.0;
   double _itemImageHeight = 0.0;
+  double _itemTextHeight = 0.0;
+  double _overdueViewHeight = 0.0;
+  double _horizontalHeight = ScreenUtil().setHeight(330);
+  bool isBigImage = true;
   int styleType = 6; //1、左图右文or左文右图-整体卡片 2、左图右文or左文右图-无边式 3、左图右文or左文右图-单独卡片 4、左图右文or左文右图-横向布局
-  // 5、小图-无边式 6、小图横向-item卡片式 7、小图-item卡片式 8、小图-整体卡片式
+  // 5、小图-无边式 6、小图横向-item卡片式 7、小图-item卡片式 8、小图-整体卡片式 9、大图-无边式  10、大图-整体卡片式 11、大图-单独卡片式
+  // 12、大图-横向
 
   @override
   Widget build(BuildContext context) {
@@ -38,23 +43,53 @@ class LearnActivityPlanState extends State<LearnActivityPlan>{
         break;
       case 5:
         _itemWidth = (ScreenUtil.screenWidth - ScreenUtil().setWidth(44)*3)/2;
-        _itemImageHeight = ScreenUtil().setHeight(337);
+        _itemImageHeight = _itemWidth*(703/993);
+        _itemTextHeight = ScreenUtil().setWidth(256);
         return _getSmallImageWrap();
         break;
       case 6:
         _itemWidth = ScreenUtil.screenWidth*0.4;
-        _itemImageHeight = ScreenUtil().setHeight(289);
+        _itemImageHeight =  _itemWidth*(703/993);
+        _itemTextHeight = ScreenUtil().setWidth(292);
+        _horizontalHeight = _itemImageHeight+_itemTextHeight+ScreenUtil().setWidth(16)*2;
         return _getTransverseView();
         break;
       case 7:
         _itemWidth = (ScreenUtil.screenWidth - ScreenUtil().setWidth(44)*3)/2;
-        _itemImageHeight = ScreenUtil().setHeight(337);
+        _itemImageHeight =  _itemWidth * (703/993);
+        _itemTextHeight = ScreenUtil().setWidth(286);
         return _getSmallImageWrap();
         break;
       case 8:
         _itemWidth = (ScreenUtil.screenWidth - ScreenUtil().setWidth(29)*3-ScreenUtil().setWidth(44)*2)/2;
-        _itemImageHeight = ScreenUtil().setHeight(322);
+        _itemImageHeight = _itemWidth*(703/993);
+        _itemTextHeight =  ScreenUtil().setWidth(256);
         return _getAllCardView();
+        break;
+      case 9:
+        _itemWidth = ScreenUtil.screenWidth -ScreenUtil().setWidth(44)*2;
+        _itemImageHeight = _itemWidth*(703/993);
+        _itemTextHeight =  ScreenUtil().setWidth(274);
+        return _getBigImageWrap();
+        break;
+      case 10:
+        _itemWidth = ScreenUtil.screenWidth - ScreenUtil().setWidth(44)*2 - ScreenUtil().setWidth(28);
+        _itemImageHeight = _itemWidth*(703/993);
+        _itemTextHeight =  ScreenUtil().setWidth(256);
+        return _getAllCardView();
+        break;
+      case 11:
+        _itemWidth = ScreenUtil.screenWidth - ScreenUtil().setWidth(44)*2;
+        _itemImageHeight = _itemWidth*(703/993);
+        _itemTextHeight =  ScreenUtil().setWidth(318);
+        return _getBigImageWrap();
+        break;
+      case 12:
+        _itemWidth = ScreenUtil.screenWidth*0.75;
+        _itemImageHeight = _itemWidth*(703/993);
+        _itemTextHeight =  ScreenUtil().setWidth(318);
+        _horizontalHeight = _itemImageHeight+_itemTextHeight+ScreenUtil().setWidth(20)*2;
+        return _getTransverseView();
         break;
       default:
         return _getNoBorderView();
@@ -137,7 +172,7 @@ class LearnActivityPlanState extends State<LearnActivityPlan>{
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(ScreenUtil().setWidth(15)))
           ),
-          child: _getSmallImageWrap(),
+          child: _getBigImageWrap(),
           ),
       ],
     );
@@ -175,7 +210,7 @@ class LearnActivityPlanState extends State<LearnActivityPlan>{
       children: [
         _listHeader(),
         Container(
-          height: styleType==6?ScreenUtil().setHeight(581):ScreenUtil().setHeight(330),
+          height: _horizontalHeight,
           margin: EdgeInsets.all(ScreenUtil().setWidth(44)),
           child: ListView(
             scrollDirection: Axis.horizontal,
@@ -188,37 +223,75 @@ class LearnActivityPlanState extends State<LearnActivityPlan>{
 
   //小图式外部外部布局
   Widget _getSmallImageWrap(){
-    return styleType==8?
-        Container(
+    switch(styleType){
+      case 5:
+      case 6:
+      case 7:
+        return Column(
+          children: [
+            _listHeader(),
+            SizedBox(height: ScreenUtil().setHeight(44),),
+            Wrap(
+              spacing: styleType==5?ScreenUtil().setWidth(44):ScreenUtil().setWidth(20),
+              runSpacing: styleType==5?ScreenUtil().setWidth(72):ScreenUtil().setWidth(30),
+              alignment: WrapAlignment.start,
+              runAlignment: WrapAlignment.start,
+              children: _getPlanList(),
+            ),
+          ],
+        );
+      break;
+      case 8:
+        return Container(
           alignment: Alignment.center,
           width: ScreenUtil.screenWidth-ScreenUtil().setWidth(44)*2,
           color: Colors.white,
           padding: EdgeInsets.only(top: ScreenUtil().setWidth(29),bottom:ScreenUtil().setWidth(29)),
-          child: Column(
-            children: [
-              Wrap(
-                spacing: styleType==5?ScreenUtil().setWidth(44):ScreenUtil().setWidth(20),
-                runSpacing: styleType==5?ScreenUtil().setWidth(72):ScreenUtil().setWidth(44),
-                alignment: WrapAlignment.start,
-                runAlignment: WrapAlignment.start,
-                children: _getPlanList(),
-              ),
-            ],
+          child: Wrap(
+            spacing: styleType==5?ScreenUtil().setWidth(44):ScreenUtil().setWidth(20),
+            runSpacing: styleType==5?ScreenUtil().setWidth(72):ScreenUtil().setWidth(44),
+            alignment: WrapAlignment.start,
+            runAlignment: WrapAlignment.start,
+            children: _getPlanList(),
           ),
-        ) :
-    Column(
-      children: [
-        _listHeader(),
-        SizedBox(height: ScreenUtil().setHeight(44),),
-        Wrap(
-          spacing: styleType==5?ScreenUtil().setWidth(44):ScreenUtil().setWidth(20),
-          runSpacing: styleType==5?ScreenUtil().setWidth(72):ScreenUtil().setWidth(30),
-          alignment: WrapAlignment.start,
-          runAlignment: WrapAlignment.start,
-          children: _getPlanList(),
-        ),
-      ],
-    );
+        );
+        break;
+      default:
+        return Container(width: 0,height: 0,);
+        break;
+    }
+  }
+
+  Widget _getBigImageWrap(){
+    switch(styleType){
+      case 9:
+      case 11:
+      case 12:
+      return Column(
+        children: [
+          _listHeader(),
+          Container(
+            padding: EdgeInsets.all(ScreenUtil().setWidth(44)),
+            child: Column(
+              children: _getPlanList(),
+            ),
+          ),
+        ],
+      );
+        break;
+      case 10:
+        return Container(
+          padding: EdgeInsets.all(ScreenUtil().setWidth(28)),
+          child: Column(
+            children: _getPlanList(),
+          ),
+        );
+        break;
+      default:
+        return Container(width: 0,height: 0,);
+        break;
+    }
+
   }
 
   List<Widget> _getPlanList(){
@@ -249,9 +322,9 @@ class LearnActivityPlanState extends State<LearnActivityPlan>{
         widgetList.add(_getHorizontalCardItem());
         break;
       case 5:
-        widgetList.add(_getSmallImageItem(0));
-        widgetList.add(_getSmallImageItem(1));
-        widgetList.add(_getSmallImageItem(2));
+        widgetList.add(_getTopImageBottomTextItem(0));
+        widgetList.add(_getTopImageBottomTextItem(1));
+        widgetList.add(_getTopImageBottomTextItem(2));
         break;
       case 6:
         widgetList.add(_getCardItem());
@@ -266,11 +339,39 @@ class LearnActivityPlanState extends State<LearnActivityPlan>{
         widgetList.add(_getCardItem());
         break;
       case 8:
-        widgetList.add(_getSmallImageItem(0));
-        widgetList.add(_getSmallImageItem(1));
-        widgetList.add(_getSmallImageItem(2));
+        widgetList.add(_getTopImageBottomTextItem(0));
+        widgetList.add(_getTopImageBottomTextItem(1));
+        widgetList.add(_getTopImageBottomTextItem(2));
+        break;
+      case 9:
+        widgetList.add(_getTopImageBottomTextItem(0));
+        widgetList.add(SizedBox(height: ScreenUtil().setWidth(71),));
+        widgetList.add(_getTopImageBottomTextItem(1));
+        widgetList.add(SizedBox(height: ScreenUtil().setWidth(71),));
+        widgetList.add(_getTopImageBottomTextItem(2));
+        break;
+      case 10:
+        widgetList.add(_getTopImageBottomTextItem(0));
+        widgetList.add(SizedBox(height: ScreenUtil().setWidth(71),));
+        widgetList.add(_getTopImageBottomTextItem(1));
+        widgetList.add(SizedBox(height: ScreenUtil().setWidth(71),));
+        widgetList.add(_getTopImageBottomTextItem(2));
+        break;
+      case 11:
+        widgetList.add(_getCardItem());
+        widgetList.add(SizedBox(height: ScreenUtil().setWidth(30),));
+        widgetList.add(_getCardItem());
+        widgetList.add(SizedBox(height: ScreenUtil().setWidth(30),));
+        widgetList.add(_getCardItem());
+        break;
+      case 12:
+        widgetList.add(SizedBox(width: ScreenUtil().setWidth(10),));
+        widgetList.add(_getCardItem());
+        widgetList.add(SizedBox(width: ScreenUtil().setWidth(10),));
+        widgetList.add(_getCardItem());
         break;
       default:
+        return [];
         break;
     }
     return widgetList;
@@ -300,7 +401,7 @@ class LearnActivityPlanState extends State<LearnActivityPlan>{
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(ScreenUtil().setWidth(15)))
       ),
-      child: _getSmallImageItem(0),
+      child: _getTopImageBottomTextItem(0),
     );
   }
 
@@ -358,6 +459,18 @@ class LearnActivityPlanState extends State<LearnActivityPlan>{
         break;
       case 8:
         return EdgeInsets.only(top: ScreenUtil().setWidth(22));
+        break;
+      case 9:
+        return EdgeInsets.only(top: ScreenUtil().setWidth(30));
+        break;
+      case 10:
+        return EdgeInsets.only(top: ScreenUtil().setWidth(30));
+        break;
+      case 11:
+        return EdgeInsets.only(top: ScreenUtil().setWidth(30),left:ScreenUtil().setWidth(28),right: ScreenUtil().setWidth(28),bottom:ScreenUtil().setWidth(30));
+        break;
+      case 12:
+        return EdgeInsets.only(top: ScreenUtil().setWidth(30),left:ScreenUtil().setWidth(28),right: ScreenUtil().setWidth(28),bottom:ScreenUtil().setWidth(30));
         break;
       default:
         return EdgeInsets.only(left: ScreenUtil().setWidth(44),right: ScreenUtil().setWidth(44),top: ScreenUtil().setWidth(36),bottom: ScreenUtil().setWidth(36));
@@ -644,19 +757,19 @@ class LearnActivityPlanState extends State<LearnActivityPlan>{
 
 
   //小图 无边item
-  Widget _getSmallImageItem(int index){
+  Widget _getTopImageBottomTextItem(int index){
 
     return Column(
       children: [
-        _getSmallImageView(""),
-        _getSmallImageTextView(index),
+        _getTopImageView(""),
+        _getBottomTextView(index),
       ],
     );
   }
 
 
   //小图-图片布局
-  Widget _getSmallImageView(String img){
+  Widget _getTopImageView(String img){
     return Container(
       width: _itemWidth,
       height: _itemImageHeight,
@@ -822,10 +935,10 @@ class LearnActivityPlanState extends State<LearnActivityPlan>{
   }
 
 //文案view
-  Widget _getSmallImageTextView(int index){
+  Widget _getBottomTextView(int index){
     return Container(
       width: _itemWidth,
-      height: ScreenUtil().setHeight(266),
+      height: _itemTextHeight,
       padding: _getPadding(),
       child: Stack(
         children: [
@@ -840,17 +953,17 @@ class LearnActivityPlanState extends State<LearnActivityPlan>{
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   color: Color(0xff222222),
-                  fontSize: ScreenUtil().setSp(41),
+                  fontSize: isBigImage?ScreenUtil().setSp(46):ScreenUtil().setSp(41),
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              SizedBox(height: ScreenUtil().setHeight(5),),
+              SizedBox(height: ScreenUtil().setHeight(10),),
               Text(
                 "2020.03.22~2020.03.30",
                 maxLines: 1,
                 style: TextStyle(
                     color: Color(0xff999999),
-                    fontSize: ScreenUtil().setSp(35)
+                    fontSize: isBigImage?ScreenUtil().setSp(37):ScreenUtil().setSp(34)
                 ),
               ),
             ],
@@ -931,4 +1044,5 @@ class LearnActivityPlanState extends State<LearnActivityPlan>{
       ),
     );
   }
+
 }
