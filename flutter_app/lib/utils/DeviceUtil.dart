@@ -22,7 +22,7 @@ class DeviceUtil{
   }
 
   //获取接口公共参数
-  static Future<String> getCommonPar() async{
+  static Future getCommonPar() async{
     //sys_id=0&brand=HUAWEI&rom=HUAWEI&client_version=1.8.9&os_version=8.0.0&sso_token=6ca93166fc1a7e4625a60c4c2255be8b&user_id=10547&company_id=145&language=zh-CN
     String systemId = "";
     String brand = "";

@@ -17,13 +17,13 @@ class HomeSwiperState extends State<HomeSwiper>{
 
   @override
   Widget build(BuildContext context) {
-    return _getImages(true);
+    return _getSwiper(false);
   }
 
   //轮播图
   Widget _getSwiper(bool isHasPadding){
     return Container(
-      height: ScreenUtil().setHeight(400),
+      height: ScreenUtil().setHeight(432),
       padding: isHasPadding?EdgeInsets.all(15):null,
       color: Colors.white,
       child: Swiper(
@@ -34,7 +34,7 @@ class HomeSwiperState extends State<HomeSwiper>{
           );
         },
         itemCount: 3,
-        pagination: SwiperPagination(builder: DotSwiperPaginationBuilder(activeColor:Colors.white,color: Color(0x50ffffff),size: 7,activeSize: 7,)),
+        pagination: SwiperPagination(builder: DotSwiperPaginationBuilder(activeColor:Colors.white,color: Color(0x50ffffff),size: ScreenUtil().setWidth(21),activeSize: ScreenUtil().setWidth(21),)),
         autoplay: true,
         autoplayDelay: 2000,
         onTap: (index){

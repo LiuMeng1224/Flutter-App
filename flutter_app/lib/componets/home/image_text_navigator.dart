@@ -45,7 +45,7 @@ class ImageTextNavigatorState extends State<ImageTextNavigator>{
     });
   }
 
-
+  //拼接item
   List<Widget> _buildItems(){
     List<Widget> items = [];
     moduleList.forEach((element) {
@@ -70,6 +70,7 @@ class ImageTextNavigatorState extends State<ImageTextNavigator>{
             Image.asset(
               "assets/images/navigator_learningcamp.webp",
               width: ScreenUtil().setWidth(100),
+              fit: BoxFit.fitWidth,
             ):
             Image.network(
               item.img,

@@ -1,7 +1,10 @@
 import 'package:ECEIBS/componets/home/home_swiper.dart';
 import 'package:ECEIBS/componets/home/image_text_navigator.dart';
 import 'package:ECEIBS/componets/home/learn_activity_paln.dart';
+import 'package:ECEIBS/http/api.dart';
 import 'package:ECEIBS/provider/message_counter.dart';
+import 'package:ECEIBS/utils/DeviceUtil.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ECEIBS/componets/HomeBanner.dart';
@@ -19,7 +22,7 @@ class HomePage extends StatefulWidget{
 }
 
 class HomePageState extends State<HomePage>{
-  List<String> _moduleList = ["banner","navigator","plan_test","elective plan","compulsory plan","swper_test","project"];
+  List<String> _moduleList = ["banner","navigator","elective plan","compulsory plan","swper_test","project"];
   ScrollController _controller = ScrollController();
   bool _isLoading = false; // 是否正在请求数据中
   bool _hasMore = true; // 是否还有更多数据可加载
@@ -100,7 +103,10 @@ class HomePageState extends State<HomePage>{
           right: 50,
           child: MaterialButton(
             color: Color(0xff005587),
-            onPressed: ()=>context.read<MessageCounter>().setCount(2),
+            onPressed: (){
+              context.read<MessageCounter>().setCount(2);
+//              DeviceUtil.getCommonPar()
+            },
             child: Text(
               "点击一下",
             style: TextStyle(
