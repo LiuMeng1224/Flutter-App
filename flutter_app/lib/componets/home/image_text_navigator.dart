@@ -32,9 +32,10 @@ class ImageTextNavigatorState extends State<ImageTextNavigator>{
 
   _getData() async{
 
-    var resultString = await postRequest(API.HOME_MODULES,formData: {"test":"123"});
-    var dataMap = json.decode(resultString.toString());
-    moduleList = dataMap['result']['nav_modules'].map<NavModules>((item)=> NavModules.fromJson(item)).toList();
+    for(int i=0;i<4;i++){
+      moduleList.add(NavModules(name: "选修库",img: "",));
+    }
+
     double temp = moduleList.length/5.0;
     lines = moduleList.length%5>0 ? temp.toInt() +1:temp.toInt();
     crossCount = moduleList.length>5 ? 5 : moduleList.length;

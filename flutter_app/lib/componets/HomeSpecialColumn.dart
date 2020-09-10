@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
-import 'package:video_player/video_player.dart';
 
 //专栏
 class HomeSpecialColumn extends StatefulWidget{

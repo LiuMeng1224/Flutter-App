@@ -14,6 +14,7 @@ class StudyActivityState extends State<StudyActivity>{
   @override
   Widget build(BuildContext context) {
     return Container(
+      alignment: Alignment.center,
       child: Text(
         "学习动态"
       ),

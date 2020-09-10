@@ -52,11 +52,12 @@ class MinPageState extends State<MinePage>{
             height: ScreenUtil().setHeight(40),
           ),
           Container(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.all(ScreenUtil().setWidth(43)),
             alignment: Alignment.centerRight,
             child: Image.asset("assets/images/icon_setting.png",
-              width: ScreenUtil().setWidth(40),
-              height: ScreenUtil().setWidth(40),
+              width: ScreenUtil().setWidth(58),
+              height: ScreenUtil().setWidth(58),
+              fit: BoxFit.fill,
             ),
           ),
           Padding(
@@ -66,8 +67,9 @@ class MinPageState extends State<MinePage>{
               children: [
                 Image.asset(
                   "assets/images/icon_mine_header.png",
-                  width: ScreenUtil().setWidth(130),
-                  height: ScreenUtil().setWidth(130),
+                  width: ScreenUtil().setWidth(180),
+                  height: ScreenUtil().setWidth(180),
+                  fit: BoxFit.fill,
                 ),
                 SizedBox(
                   width: 10,
@@ -81,7 +83,8 @@ class MinPageState extends State<MinePage>{
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           color: Color(0xff2A2B2B),
-                          fontSize: 17,
+                          fontSize: ScreenUtil().setSp(52),
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                       Text("最近登录：2020.04.23",
@@ -89,7 +92,7 @@ class MinPageState extends State<MinePage>{
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           color: Color(0xff777777),
-                          fontSize: 12,
+                          fontSize: ScreenUtil().setSp(37),
                         ),
                       ),
                     ],
@@ -106,7 +109,7 @@ class MinPageState extends State<MinePage>{
 
   Widget _getMyStudy(){
     return Container(
-      height: ScreenUtil().setHeight(200*_lines),
+      height: ScreenUtil().setHeight(240*_lines),
       padding: EdgeInsets.only(top:12,left: 15,right: 15,bottom: 20),
       color: Colors.white,
       child: GridView.count(
@@ -130,8 +133,8 @@ class MinPageState extends State<MinePage>{
     return Column(
       children: [
         Image.asset(item.img,
-          width: ScreenUtil().setWidth(40),
-          fit: BoxFit.fitWidth,
+          height: ScreenUtil().setHeight(66),
+          fit: BoxFit.fitHeight,
         ),
         SizedBox(
           height: 5,
@@ -139,7 +142,7 @@ class MinPageState extends State<MinePage>{
         Text(
           item.name,
           style: TextStyle(
-            fontSize: 12,
+            fontSize: ScreenUtil().setSp(37),
             color: Color(0xff2A2B2B)
           ),
         )
@@ -152,20 +155,24 @@ class MinPageState extends State<MinePage>{
     return Column(
       children: [
         _getUserInfo(),
+        Container(
+          height: ScreenUtil().setHeight(29),
+          color: Color(0xffF7F7F7),
+        ),
         SizedBox(
           height: 10,
         ),
         Container(
-          padding: EdgeInsets.only(left: 15),
+          padding: EdgeInsets.only(left: ScreenUtil().setWidth(43)),
           height: ScreenUtil().setHeight(80),
           alignment: Alignment.centerLeft,
           color: Colors.white,
           child: Text(
             "我的学习",
             style: TextStyle(
-              fontSize: 14,
+              fontSize: ScreenUtil().setSp(43),
               color: Color(0xff222222),
-              fontWeight: FontWeight.w600
+              fontWeight: FontWeight.w500
             ),
           ),
         ),

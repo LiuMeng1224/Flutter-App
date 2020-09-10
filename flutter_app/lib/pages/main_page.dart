@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ECEIBS/pages/HomePage.dart';
-import 'package:ECEIBS/pages/MinePage.dart';
+import 'package:ECEIBS/pages/home_page.dart';
+import 'package:ECEIBS/pages/mine_page.dart';
 import 'package:ECEIBS/pages/learning_camp.dart';
 import 'package:ECEIBS/pages/stuty_acitivity.dart';
 import 'package:ECEIBS/componets/home/home_search.dart';

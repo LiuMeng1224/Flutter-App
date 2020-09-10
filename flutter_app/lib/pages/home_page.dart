@@ -93,23 +93,6 @@ class HomePageState extends State<HomePage>{
           ),
           onRefresh: _handleRefresh,
         ),
-        Positioned(
-          bottom: 50,
-          right: 50,
-          child: MaterialButton(
-            color: Color(0xff005587),
-            onPressed: (){
-              context.read<MessageCounter>().setCount(2);
-//              DeviceUtil.getCommonPar()
-            },
-            child: Text(
-              "点击一下",
-            style: TextStyle(
-              color: Colors.white
-            ),
-            ),
-          ),
-        ),
       ],
     );
   }
