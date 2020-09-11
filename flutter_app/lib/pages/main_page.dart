@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:ECEIBS/pages/home_page.dart';
 import 'package:ECEIBS/pages/mine_page.dart';
 import 'package:ECEIBS/pages/learning_camp.dart';
-import 'package:ECEIBS/pages/stuty_acitivity.dart';
+import 'package:ECEIBS/pages/knowledge_center.dart';
 import 'package:ECEIBS/componets/home/home_search.dart';
 
 //主页面
@@ -33,7 +33,7 @@ class _MainPageState extends State<MainPage> {
     _widgetList
       ..add(HomePage())
       ..add(LearningCampPage())
-      ..add(StudyActivity())
+      ..add(KnowledgeCenter())
       ..add(MinePage());
     _tabData.forEach((element) {
       _itemList.add(BottomNavigationBarItem(
