@@ -1,4 +1,5 @@
 import 'package:ECEIBS/common/common_color.dart';
+import 'package:ECEIBS/componets/knowcenter_category.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
@@ -13,16 +14,19 @@ class KnowledgeCenter extends StatefulWidget{
 
 class KnowledgeCenterState extends State<KnowledgeCenter>{
   List<String> titles = ["类型","分类","排序"];
-  int _currentIndex = 0;
+  int _currentIndex = -1;
   EasyRefreshController _refreshController;
   ScrollController _scrollController;
-  int _dataCount = 0;
+  int _dataCount = 4;
+
+
 
   @override
   void initState() {
     super.initState();
     _refreshController = EasyRefreshController();
     _scrollController = ScrollController();
+
   }
 
   @override
@@ -74,23 +78,31 @@ class KnowledgeCenterState extends State<KnowledgeCenter>{
               ),
             ),
             Expanded(
-              child: EasyRefresh.custom(
-                  header: ClassicalHeader(),
-                  footer:ClassicalFooter(),
-                  controller: _refreshController,
-                  scrollController: _scrollController,
-                  onRefresh: _refreshData,
-                  onLoad: _reloadData,
-                  slivers: [
-                    SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                          (context,index){
-                            return _getListItem();
-                          },
-                        childCount: _dataCount
-                      ),
-                    )
-                  ]
+              child: Stack(
+                children: [
+                  EasyRefresh.custom(
+                      header: ClassicalHeader(),
+                      footer:ClassicalFooter(),
+                      controller: _refreshController,
+                      scrollController: _scrollController,
+                      onRefresh: _refreshData,
+                      onLoad: _reloadData,
+                      slivers: [
+                        SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                                  (context,index){
+                                return _getListItem();
+                              },
+                              childCount: _dataCount
+                          ),
+                        )
+                      ]
+                  ),
+                  Offstage(
+                    offstage: _currentIndex!=0,
+                    child: KnowledgeCenterCategory(),
+                  )
+                ],
               ),
             ),
           ],
@@ -148,14 +160,21 @@ class KnowledgeCenterState extends State<KnowledgeCenter>{
         width: width,
         height: 50,
         alignment: Alignment.center,
-        child: Text(
-          label,
-          maxLines: 1,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: _currentIndex==titles.indexOf(label)?CommonColor.themeColor:CommonColor.textNormalColor,
-            fontSize: 14,
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              label,
+              maxLines: 1,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: _currentIndex==titles.indexOf(label)?CommonColor.themeColor:CommonColor.textNormalColor,
+                fontSize: 14,
+              ),
+            ),
+            Icon(IconData(_currentIndex==titles.indexOf(label)?0xe62b:0xe62a,fontFamily: 'iconfont'),size: 8,color: CommonColor.grey9,),
+          ],
         ),
       ),
     );

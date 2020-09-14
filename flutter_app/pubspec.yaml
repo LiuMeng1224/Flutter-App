@@ -101,9 +101,11 @@ flutter:
     - assets/images/home/icon_home_search.png
     - assets/images/home/icon_collect_plan.png
     - assets/images/home/icon_plan_more.png
-    - assets/audio/Butterfly-209.mp4
-    - assets/audio/bumble_bee_captions.srt
 
+  fonts:
+    - family: iconfont
+      fonts:
+        - asset: assets/fonts/iconfont.ttf
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
