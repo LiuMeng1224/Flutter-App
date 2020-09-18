@@ -1,5 +1,7 @@
+import 'package:ECEIBS/event/event_bus.dart';
 import 'package:ECEIBS/provider/message_counter.dart';
 import 'package:ECEIBS/router/application.dart';
+import 'package:event_bus/event_bus.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,6 +27,7 @@ class MyApp extends StatelessWidget {
     Routers.configureRouters(router);
     Application.router = router;
     SystemChrome.setEnabledSystemUIOverlays([]);
+    ApplicationEvent.eventBus = EventBus();
     
     //flutter可以隐藏状态栏或使得状态栏透明，同时也支持底部按钮栏的隐藏
 //    SystemChrome.setEnabledSystemUIOverlays([]);//隐藏状态栏，底部按钮栏

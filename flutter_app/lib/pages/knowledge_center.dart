@@ -1,5 +1,6 @@
 import 'package:ECEIBS/common/common_color.dart';
-import 'package:ECEIBS/componets/knowcenter_category.dart';
+import 'package:ECEIBS/componets/popu/category_popupwindow.dart';
+import 'package:ECEIBS/componets/popu/knowcenter_category.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
@@ -13,13 +14,15 @@ class KnowledgeCenter extends StatefulWidget{
 }
 
 class KnowledgeCenterState extends State<KnowledgeCenter>{
-  List<String> titles = ["类型","分类","排序"];
+
+  List<String> _titles = ["类型","分类","排序"];
   int _currentIndex = -1;
   EasyRefreshController _refreshController;
   ScrollController _scrollController;
   int _dataCount = 4;
-
-
+  List<String> _types = ["type","category","sort"];
+  final GlobalKey _boyKey = GlobalKey();
+  final GlobalKey _filterKey = GlobalKey();
 
   @override
   void initState() {
@@ -31,82 +34,76 @@ class KnowledgeCenterState extends State<KnowledgeCenter>{
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: titles.length,
-      initialIndex: 0,
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          centerTitle: true,
-          title: Text(
-            "知识汇",
-            style: TextStyle(
-                color: CommonColor.textNormalColor,
-                fontSize: 17
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
+        title: Text(
+          "知识汇",
+          style: TextStyle(
+              color: CommonColor.textNormalColor,
+              fontSize: 17
           ),
         ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 1,
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  color: CommonColor.dividerLineF7,
+      ),
+      body: Column(
+        key: _boyKey,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: 1,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: CommonColor.dividerLineF7,
+              ),
+            ),
+          ),
+          Container(
+            key: _filterKey,
+            width: MediaQuery.of(context).size.width,
+            height: 45,
+            color: Colors.white,
+            alignment: Alignment.center,
+            child: Row(
+              children: _getTabList(MediaQuery.of(context).size.width/_titles.length),
+            ),
+          ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: 1,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: CommonColor.dividerLineF7,
+              ),
+            ),
+          ),
+          Expanded(
+            child: Stack(
+              children: [
+                EasyRefresh.custom(
+                    header: ClassicalHeader(),
+                    footer:ClassicalFooter(),
+                    controller: _refreshController,
+                    scrollController: _scrollController,
+                    onRefresh: _refreshData,
+                    onLoad: _reloadData,
+                    slivers: [
+                      SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                                (context,index){
+                              return _getListItem();
+                            },
+                            childCount: _dataCount
+                        ),
+                      )
+                    ]
                 ),
-              ),
+              ],
             ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: 45,
-              color: Colors.white,
-              alignment: Alignment.center,
-              child: Row(
-                children: _getTabList(MediaQuery.of(context).size.width/titles.length),
-              ),
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 1,
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  color: CommonColor.dividerLineF7,
-                ),
-              ),
-            ),
-            Expanded(
-              child: Stack(
-                children: [
-                  EasyRefresh.custom(
-                      header: ClassicalHeader(),
-                      footer:ClassicalFooter(),
-                      controller: _refreshController,
-                      scrollController: _scrollController,
-                      onRefresh: _refreshData,
-                      onLoad: _reloadData,
-                      slivers: [
-                        SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                                  (context,index){
-                                return _getListItem();
-                              },
-                              childCount: _dataCount
-                          ),
-                        )
-                      ]
-                  ),
-                  Offstage(
-                    offstage: _currentIndex!=0,
-                    child: KnowledgeCenterCategory(),
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -141,7 +138,7 @@ class KnowledgeCenterState extends State<KnowledgeCenter>{
   List<Widget> _getTabList(double width){
 
     List<Widget> widgetList = [];
-    titles.forEach((element) {
+    _titles.forEach((element) {
       widgetList.add(_getTabItem(element,width));
     });
     return widgetList;
@@ -151,9 +148,9 @@ class KnowledgeCenterState extends State<KnowledgeCenter>{
   Widget _getTabItem(String label,double width){
     return InkWell(
       onTap: (){
-        _currentIndex = titles.indexOf(label);
+        _currentIndex = _titles.indexOf(label);
+        _showSortMenu();
         setState(() {
-
         });
       },
       child: Container(
@@ -169,11 +166,11 @@ class KnowledgeCenterState extends State<KnowledgeCenter>{
               maxLines: 1,
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: _currentIndex==titles.indexOf(label)?CommonColor.themeColor:CommonColor.textNormalColor,
+                color: _currentIndex==_titles.indexOf(label)?CommonColor.themeColor:CommonColor.textNormalColor,
                 fontSize: 14,
               ),
             ),
-            Icon(IconData(_currentIndex==titles.indexOf(label)?0xe62b:0xe62a,fontFamily: 'iconfont'),size: 8,color: CommonColor.grey9,),
+            Icon(IconData(_currentIndex==_titles.indexOf(label)?0xe62b:0xe62a,fontFamily: 'iconfont'),size: 8,color: CommonColor.grey9,),
           ],
         ),
       ),
@@ -265,4 +262,29 @@ class KnowledgeCenterState extends State<KnowledgeCenter>{
       overflow: TextOverflow.ellipsis,
     );
   }
+
+  void _showSortMenu() {
+    // 获取点击控件的坐标
+    final RenderBox button = _filterKey.currentContext.findRenderObject() as RenderBox;
+    final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
+    // 获得控件左下方的坐标
+    final Offset a =  button.localToGlobal(Offset(0.0, button.size.height), ancestor: overlay);
+    // 获得控件右下方的坐标
+    final Offset b =  button.localToGlobal(button.size.bottomLeft(const Offset(0, 12.0)), ancestor: overlay);
+    final RelativeRect position = RelativeRect.fromRect(
+      Rect.fromPoints(a, b),
+      Offset.zero & overlay.size,
+    );
+    final RenderBox body = _boyKey.currentContext.findRenderObject() as RenderBox;
+    showPopupWindow<void>(
+      context: context,
+      fullWidth: true,
+      position: position,
+      elevation: 0.0,
+      child: KnowledgeCenterCategory(body.size.height-button.size.height),
+    );
+
+  }
+
+
 }

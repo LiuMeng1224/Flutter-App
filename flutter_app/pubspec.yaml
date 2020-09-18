@@ -38,6 +38,7 @@ dependencies:
   fluttertoast: ^7.0.2
   device_info: ^0.4.2+4
   package_info: ^0.4.1
+  event_bus: ^1.1.1
 
 dev_dependencies:
   flutter_test:
