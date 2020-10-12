@@ -45,8 +45,7 @@ Future<T> showPopupWindow<T>({
           elevation: elevation,
           semanticLabel: label,
           theme: Theme.of(context, shadowThemeOnly: true),
-          barrierLabel:
-          MaterialLocalizations.of(context).modalBarrierDismissLabel,
+          barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
           fullWidth: fullWidth,
           isShowBg: isShowBg
       ));
@@ -211,6 +210,7 @@ class _PopupWindowLayoutDelegate extends SingleChildLayoutDelegate {
   final double selectedItemOffset;
   final TextDirection textDirection;
 
+  //约束子控件的大小
   @override
   BoxConstraints getConstraintsForChild(BoxConstraints constraints) {
     // The menu can be at most the size of the overlay minus 8.0 pixels in each
@@ -219,6 +219,7 @@ class _PopupWindowLayoutDelegate extends SingleChildLayoutDelegate {
         const Offset(_kWindowScreenPadding * 2.0, _kWindowScreenPadding * 2.0));
   }
 
+  //确定子控件的位置
   @override
   Offset getPositionForChild(Size size, Size childSize) {
     // size: The size of the overlay.
@@ -269,6 +270,7 @@ class _PopupWindowLayoutDelegate extends SingleChildLayoutDelegate {
     return Offset(x, y);
   }
 
+  //是否需要重新布局
   @override
   bool shouldRelayout(_PopupWindowLayoutDelegate oldDelegate) {
     return position != oldDelegate.position;
